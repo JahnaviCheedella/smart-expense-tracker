@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Smart Expense Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application designed to help you track, categorize, and summarize your personal expenses easily.
 
-## Available Scripts
+## Features
+- **Add Expenses**: Quickly log your spending with amount, category, and notes.
+- **View & Manage**: See a list of all your records, with the ability to edit or delete any expense.
+- **Data Filtering**: Filter your expenses by specific categories or date ranges (Start and End dates).
+- **Summary Dashboard**: Instantly view summarized totals grouped by category to see where you spend the most.
 
-In the project directory, you can run:
+## Tech Stack
+- **Frontend**: React, Material-UI (MUI), Axios
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL (`pg` library)
 
-### `npm start`
+## Project Structure
+The repository is split into two main sections:
+- `/frontend` - Contains the React application.
+- `/backend` - Contains the Node.js API server and database configuration.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- [Node.js](https://nodejs.org/) installed
+- [PostgreSQL](https://www.postgresql.org/) database set up and running
 
-### `npm test`
+### Backend Setup
+1. Navigate to the `backend` directory:
+   ```bash
+   cd backend
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file in the `backend` directory with your PostgreSQL connection details:
+   ```env
+   DB_USER=postgres
+   DB_HOST=localhost
+   DB_DATABASE=expense_tracker
+   DB_PASSWORD=your_password
+   DB_PORT=5432
+   SERVER_PORT=5000
+   ```
+4. Start the backend server:
+   ```bash
+   npm start
+   ```
+   *(The server will run on port 5000 by default.)*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend Setup
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the React development server:
+   ```bash
+   npm start
+   ```
+   *(The application will be accessible at http://localhost:3000.)*
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Database Schema
+To run this application, you will need an `expenses` table in your PostgreSQL database with the following structure:
+```sql
+CREATE TABLE expenses (
+    id SERIAL PRIMARY KEY,
+    amount NUMERIC NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
