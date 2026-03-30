@@ -40,8 +40,6 @@ const App = () => {
   return (
     <Container>
       <Typography variant="h4" align="center" fontWeight="bold" p={2} gutterBottom>Expense Tracker</Typography>
-
-
       <ExpenseForm refresh={refresh} />
       <Divider sx={{ my: 2, borderColor: "#000" }} />
       <ExpenseFilter onFilter={handleFilter} />
