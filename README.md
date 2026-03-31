@@ -1,6 +1,6 @@
-# Smart Expense Tracker
+# Secure Expense Tracker
 
-A full-stack, secure web application designed to help you track, categorize, and summarize your personal expenses with ease. This version includes integrated Firebase Authentication for secure user management.
+A secure full-stack web application that helps users track, categorize, and summarize personal expenses, with Firebase Authentication and JWT-based verification ensuring secure user management.
 
 ## Features
 
