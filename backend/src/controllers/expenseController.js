@@ -1,7 +1,7 @@
-import { pool } from "../db.js";
+import { pool } from "../db/db.js";
 
 //create
-export const CreateExpense = async (req, res) => {
+export const createExpense = async (req, res) => {
     try {
         const { amount, category, note } = req.body;
         const result = await pool.query("INSERT INTO expenses (amount, category, note) VALUES ($1, $2, $3) RETURNING *", [amount, category, note]);

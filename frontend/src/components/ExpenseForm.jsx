@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import httpCommon from "../httpCommon";
+import api from "../api";
 
 const fields = [
   { label: "Amount", name: "amount", type: "number" },
@@ -21,9 +21,10 @@ const ExpenseForm = ({ refresh }) => {
       return;
     }
     try {
-      await httpCommon.post("/", form);
+      await api.post("/expenses", form);
       setForm({ amount: "", category: "", note: "" });
       refresh();
+
     } catch (err) {
       console.error(err);
     }

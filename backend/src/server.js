@@ -1,15 +1,17 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 
-dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/expenses", expenseRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/expenses", expenseRoutes)
+
 
 const PORT = process.env.SERVER_PORT || 5000
 

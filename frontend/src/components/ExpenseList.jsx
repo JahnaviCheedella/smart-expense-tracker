@@ -14,8 +14,9 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import httpCommon from "../httpCommon";
+import api from "../api";
 import DeleteIcon from "@mui/icons-material/Delete";
+
 import EditIcon from "@mui/icons-material/Edit";
 import Summary from "./Summary";
 
@@ -35,9 +36,10 @@ const ExpenseList = ({ refresh, data }) => {
   });
 
   const deleteExpense = async (id) => {
-    await httpCommon.delete(`/${id}`);
+    await api.delete(`/expenses/${id}`);
     refresh();
   };
+
 
   const handleEditClick = (expense) => {
     setEditData(expense);
@@ -53,9 +55,10 @@ const ExpenseList = ({ refresh, data }) => {
       alert("Please fill in all fields.");
       return;
     }
-    await httpCommon.put(`/${editData.id}`, editData);
+    await api.put(`/expenses/${editData.id}`, editData);
     refresh();
     setOpen(false);
+
   };
 
   const handleChange = (e) => {

@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
-import httpCommon from "../httpCommon";
+import api from "../api";
 
 const Summary = ({ refresh }) => {
     const [data, setData] = useState([]);
@@ -9,7 +9,7 @@ const Summary = ({ refresh }) => {
     useEffect(() => {
         const fetchSummary = async () => {
             try {
-                const res = await httpCommon.get("/summary");
+                const res = await api.get("/expenses/summary");
                 setData(res.data);
             } catch (err) {
                 console.error(err);
