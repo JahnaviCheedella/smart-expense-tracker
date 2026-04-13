@@ -1,8 +1,9 @@
-import { Container, Divider, Typography } from "@mui/material";
+import { Container, Grid, Typography, Box } from "@mui/material";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseFilter from "./ExpenseFilter";
 import { useState, useEffect } from "react";
 import ExpenseList from "./ExpenseList";
+import Summary from "./Summary";
 import api from "../api";
 
 const MainPage = () => {
@@ -18,7 +19,6 @@ const MainPage = () => {
         try {
             const res = await api.get("/expenses", { params });
             setExpenses(res.data);
-
         } catch (err) {
             console.error(err);
         }
@@ -39,13 +39,36 @@ const MainPage = () => {
     }
 
     return (
-        <Container>
-            <Typography variant="h4" align="center" fontWeight="bold" p={2} gutterBottom>Expense Tracker</Typography>
-            <ExpenseForm refresh={refresh} />
-            <Divider sx={{ my: 2, borderColor: "#000" }} />
-            <ExpenseFilter onFilter={handleFilter} />
-            <ExpenseList refresh={refresh} data={expenses} />
-        </Container>
+        <Box sx={{ bgcolor: "background.default", minHeight: "calc(100vh - 64px)", py: 4 }}>
+            <Container maxWidth="lg">
+                <Grid container spacing={4}>
+                    {/* Header Section */}
+                    <Grid size={12}>
+                        <Box sx={{ mb: 2 }}>
+                            <Typography variant="h4" fontWeight="800">Dashboard</Typography>
+                            <Typography variant="body1" color="text.secondary">Manage and track your spending habits</Typography>
+                        </Box>
+                    </Grid>
+
+                    {/* Summary Section */}
+                    <Grid size={12}>
+                        <Summary refresh={refresh} />
+                    </Grid>
+
+                    {/* Main Content Area */}
+                    <Grid size={{ xs: 12, md: 4 }}>
+                        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                            <ExpenseForm refresh={refresh} />
+                            <ExpenseFilter onFilter={handleFilter} />
+                        </Box>
+                    </Grid>
+
+                    <Grid size={{ xs: 12, md: 8 }}>
+                        <ExpenseList refresh={refresh} data={expenses} />
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
     )
 }
 

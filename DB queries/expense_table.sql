@@ -2,8 +2,8 @@ CREATE TABLE expenses (
 	id SERIAL PRIMARY KEY,
 	amount NUMERIC NOT NULL,
 	category VARCHAR(50),
-	note TEXT,
+	note TEXT, 
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
+);
 
 SELECT * FROM expenses;

@@ -1,21 +1,19 @@
 import { useState } from "react";
-import { Grid, TextField, Button, Box } from "@mui/material";
-
-const filterFields = [
-  { name: "category", label: "Category", type: "text" },
-  {
-    name: "start",
-    label: "Start Date",
-    type: "date",
-    InputLabelProps: { shrink: true },
-  },
-  {
-    name: "end",
-    label: "End Date",
-    type: "date",
-    InputLabelProps: { shrink: true },
-  },
-];
+import { 
+    TextField, 
+    Button, 
+    Card, 
+    CardContent, 
+    Typography, 
+    Stack,
+    InputAdornment
+} from "@mui/material";
+import { 
+    FilterAlt as FilterIcon, 
+    FilterAltOff as ClearIcon,
+    Search as SearchIcon,
+    DateRange as DateIcon
+} from "@mui/icons-material";
 
 const ExpenseFilter = ({ onFilter }) => {
   const [filters, setFilters] = useState({ category: "", start: "", end: "" });
@@ -35,35 +33,90 @@ const ExpenseFilter = ({ onFilter }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mb: 4, mt: 2 }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{ alignItems: "center", justifyContent: "center" }}
-      >
-        {filterFields.map((field) => (
-          <Grid key={field.name}>
+    <Card elevation={2}>
+      <CardContent>
+        <Typography variant="h6" fontWeight="700" gutterBottom>
+          Filters
+        </Typography>
+        <Stack spacing={2} sx={{ mt: 2 }}>
             <TextField
-              {...field}
-              size="small"
-              value={filters[field.name]}
-              onChange={handleFilterChange}
+                label="Search Category"
+                name="category"
+                size="small"
+                value={filters.category}
+                onChange={handleFilterChange}
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon fontSize="small" />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
             />
-          </Grid>
-        ))}
-        <Grid>
-          <Button variant="contained" onClick={handleApply}>
-            Filter
-          </Button>
-        </Grid>
-        <Grid>
-          <Button variant="outlined" onClick={handleClear}>
-            Clear
-          </Button>
-        </Grid>
-      </Grid>
-    </Box>
+            
+            <TextField
+                label="Start Date"
+                name="start"
+                type="date"
+                size="small"
+                value={filters.start}
+                onChange={handleFilterChange}
+                slotProps={{
+                    inputLabel: { shrink: true },
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <DateIcon fontSize="small" />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
+            />
+
+            <TextField
+                label="End Date"
+                name="end"
+                type="date"
+                size="small"
+                value={filters.end}
+                onChange={handleFilterChange}
+                slotProps={{
+                    inputLabel: { shrink: true },
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <DateIcon fontSize="small" />
+                            </InputAdornment>
+                        ),
+                    },
+                }}
+            />
+
+            <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
+                <Button 
+                    fullWidth 
+                    variant="contained" 
+                    startIcon={<FilterIcon />}
+                    onClick={handleApply}
+                >
+                    Apply
+                </Button>
+                <Button 
+                    fullWidth 
+                    variant="outlined" 
+                    startIcon={<ClearIcon />}
+                    onClick={handleClear}
+                >
+                    Clear
+                </Button>
+            </Stack>
+        </Stack>
+      </CardContent>
+    </Card>
   );
 };
 
 export default ExpenseFilter;
+

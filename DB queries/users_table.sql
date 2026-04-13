@@ -1,7 +1,7 @@
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  firebase_uid VARCHAR(200) UNIQUE,
-  email VARCHAR(100)
+  firebase_uid VARCHAR(200) NOT NULL UNIQUE,
+  email VARCHAR(100) NOT NULL
 );
 
 SELECT * FROM users;
